@@ -5,6 +5,10 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  --bs-dark: var(--nat-navbar-bg);
+  --bs-dark-rgb: var(--nat-navbar-bg-rgb);
+  background:fixed center url('/IMG_0956.JPG');
+  background-size: cover;
 }
 .wrapper {
   box-sizing: border-box;
@@ -12,3 +16,28 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+:root {
+  --nat-navbar-bg: #223148;
+  --nat-navbar-bg-rgb: 34, 49, 72;
+  --nat-navbar-text-color: white;
+  --nat-navbar-highlight-text: khaki;
+}
+
+footer, footer a {
+  color: var(--nat-navbar-text-color);
+}
+
+body .navbar {
+  --bs-navbar-active-color: var(--nat-navbar-highlight-text);
+  --bs-navbar-brand-color: var(--nat-navbar-text-color);
+  --bs-navbar-brand-hover-color: var(--nat-navbar-highlight-text);
+  --bs-navbar-color: var(--nat-navbar-text-color);
+  --bs-navbar-hover-color: var(--nat-navbar-highlight-text);
+}
+
+.bg-dark a.dropdown-item {
+  color: var(--nat-navbar-bg);
+}
+
+
