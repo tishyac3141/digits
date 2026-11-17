@@ -2,11 +2,10 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import { auth } from '@/lib/auth';
 import ContactCard from '@/components/ContactCard';
-import {prisma} from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 /** Render a list of contacts for the logged in user. */
 const ListPage = async () => {
-  // Protect the page, only logged in users can access it.
   const session = await auth();
   loggedInProtectedPage(
     session as {
@@ -18,9 +17,10 @@ const ListPage = async () => {
   const contacts = await prisma.contact.findMany({
     where: { owner },
   });
+  const notes = await prisma.note.findMany({
+    where: { owner },
+  });
 
-
-  // console.log(stuff);
   return (
     <main>
       <Container id="list" fluid className="py-3">
@@ -30,7 +30,10 @@ const ListPage = async () => {
             <Row xs={1} md={2} lg={3} className="g-4">
               {contacts.map((contact) => (
                 <Col key={`Contact-${contact.firstName}`}>
-                  <ContactCard {...contact} />
+                  <ContactCard
+                    contact={contact}
+                    notes={notes.filter((note) => note.contactId === contact.id)}
+                  />
                 </Col>
               ))}
             </Row>
